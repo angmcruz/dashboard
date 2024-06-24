@@ -4,7 +4,8 @@ import Grid from '@mui/material/Unstable_Grid2';
 import BasicTable from './components/BasicTable';
 import Indicator from './components/Indicator';
 import Summary from './components/Summary';
-
+import WeatherChart from './components/WeatherChart';
+import ControlPanel from './components/ControlPane';
 
 function App() {
 	return (
@@ -35,6 +36,12 @@ function App() {
       <Grid xs={12} md={6} lg={9} >
 	       <BasicTable />
 	    </Grid>  
+		<Grid xs={12} lg={2}>
+             <ControlPanel />
+         </Grid>
+		<Grid xs={12} lg={10}>
+             <WeatherChart></WeatherChart>
+         </Grid>
 
       </Grid> 
       </>    
