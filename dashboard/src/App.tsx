@@ -6,13 +6,15 @@ import Indicator from './components/Indicator';
 import Summary from './components/Summary';
 import WeatherChart from './components/WeatherChart';
 import ControlPanel from './components/ControlPane';
-import { useEffect, useState } from 'react';
 import Header from './components/Header';
+import { useEffect, useState } from 'react';
+s
 
 function App() {
 
 	let [Indicators, setIndicators] = useState([])
 	let [rowsTable, setRowsTable] = useState([])
+	
 
 	useEffect(() => {
 		//autoejecuta
@@ -108,7 +110,7 @@ function App() {
 	return (
 
 		<>
-            <Header />
+            <Header title = "New Dashboard: Ec"/>
             <Grid container spacing={3} sx={{ padding: 3 }}>
                 
                 <Grid  xs={12} container spacing={3}>
@@ -129,7 +131,7 @@ function App() {
                     </Grid>
                 </Grid>
 
-                <Header />
+                <Header title = "Datos por Ciudad"/>
                 <Grid  xs={12} container spacing={3}>
                     <BasicTable rows={rowsTable} />
                 </Grid>
@@ -139,6 +141,8 @@ function App() {
                     <Grid  xs={12} lg={4}>
                         <ControlPanel />
                     </Grid>
+
+				<Header title = "Graficos"/>
                     <Grid  xs={12} lg={8}>
                         <WeatherChart />
                     </Grid>
