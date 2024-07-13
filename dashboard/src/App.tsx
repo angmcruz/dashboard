@@ -133,26 +133,28 @@ function App() {
                     <Grid  xs={12} md={4} lg={2}>
                         <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} />
                     </Grid>
-                    <Grid  xs={12} sm={4} md={3} lg={2}>
+                    <Grid  xs={12} sm={4} md={3} lg={4}>
                         <Summary />
                     </Grid>
                 </Grid>
 
                 <Header title = "Datos por Ciudad"/>
-				<Ciudades onCityChange={handleCityChange} />
+				
                 <Grid  xs={12} container spacing={3}>
+
                     <BasicTable rows={rowsTable} />
                 </Grid>
 
-                
+                <Header title = "Graficos"/>
+				<Ciudades onCityChange={handleCityChange} />
                 <Grid  xs={12} container spacing={3}>
-                    <Grid  xs={12} lg={4}>
+                    <Grid  xs={12} lg={12}>
                         <ControlPanel />
                     </Grid>
 
-				<Header title = "Graficos"/>
-                    <Grid  xs={12} lg={8}>
-                        <WeatherChart />
+				
+                    <Grid  xs={12} lg={12}>
+						<WeatherChart city={selectedCity} />
                     </Grid>
                 </Grid>
             </Grid>
