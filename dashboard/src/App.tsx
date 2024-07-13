@@ -9,7 +9,7 @@ import ControlPanel from './components/ControlPane';
 import Header from './components/Header';
 import Ciudades from './components/Ciudades'; 
 import { useEffect, useState } from 'react';
-s
+
 
 function App() {
 
