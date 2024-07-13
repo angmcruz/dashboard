@@ -59,6 +59,7 @@ function App() {
 
 
 			//xml parser (analizador)
+			if(savedTextXML){
 			const parser = new DOMParser();
 			const xml = parser.parseFromString(savedTextXML, "application/xml");
 
@@ -75,7 +76,7 @@ function App() {
 
 			let longitude = location.getAttribute("longitude")
 			dataToIndicators.push(["Location", "Longitude", longitude])
-
+			
 			console.log(dataToIndicators)
 
 			//renderizado array
@@ -84,11 +85,12 @@ function App() {
 			)
 
 			//se modifica el estado de la variable por la funcion
-			setIndicators(indicatorsElements)
+			setIndicators(indicatorsElements);
 
 			let arrayObjects = Array.from(xml.getElementsByTagName("time")).map((timeElement) => {
 
-				let rangeHours = timeElement.getAttribute("from").split("T")[1] + " - " + timeElement.getAttribute("to").split("T")[1]
+				let rangeHours = timeElement.getAttribute("from").split("T")[1] + " - " 
+				+ timeElement.getAttribute("to").split("T")[1]
 
 				let windDirection = timeElement.getElementsByTagName("windDirection")[0].getAttribute("deg") + " " + timeElement.getElementsByTagName("windDirection")[0].getAttribute("code")
 
@@ -100,7 +102,7 @@ function App() {
 
 			setRowsTable(arrayObjects)
 
-
+			};
 
 		})()
 
@@ -108,7 +110,7 @@ function App() {
 
 
 	}, [selectedCity])
-	const handleCityChange = (city) => {
+	const handleCityChange = (city:string) => {
         setSelectedCity(city);
     };
 

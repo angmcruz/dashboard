@@ -27,21 +27,28 @@ import { useState, useEffect } from 'react';
 // ];
 
 interface Config {
-  rows: Array<object>;
+  rows: Row[];
 }
 
-export default function BasicTable(data:Config) {
-  let [rows, setRows] = useState([])
+interface Row {
+  rangeHours: string;
+  windDirection: string;
+}
+
+
+
+export default function BasicTable( rows: Config) {
+  let [tablerows, setRows] = useState<Row[]>([]);
 
   useEffect( () => {
 
     (()=> {
 
-        setRows(data.rows)
+        setRows(rows.rows)
 
     })()
 
-}, [data] )
+}, [rows] )
 
 
 
@@ -55,7 +62,7 @@ export default function BasicTable(data:Config) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {tablerows.map((row) => (
             <TableRow
             key={row.rangeHours}  
         >

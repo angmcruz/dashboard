@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
-function Ciudades({ onCityChange }) {
+
+interface Cities{
+    onCityChange: (city: string) => void;
+}
+
+function Ciudades({ onCityChange} : Cities) {
     const [city, setCity] = useState('');
 
     const handleChange = (event) => {

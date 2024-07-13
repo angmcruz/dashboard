@@ -10,7 +10,7 @@ interface WeatherChart {
 }
 export default function WeatherChart({city}: WeatherChart) {
 
-    const [data, setData] = useState([["Hora", "Precipitación", "Humedad", "Nubosidad"]]);
+    let [data, setData] = useState([["Hora", "Precipitación", "Humedad", "Nubosidad"]]);
     
 
     {/* Configuración */}
@@ -26,7 +26,7 @@ export default function WeatherChart({city}: WeatherChart) {
    
     useEffect(() => {
        
-        const datosbycity = {
+        let datosbycity = {
             "Guayaquil": [
                 ["Hora", "Precipitación", "Humedad", "Nubosidad"],
                 ["03:00", 13, 78, 75],
