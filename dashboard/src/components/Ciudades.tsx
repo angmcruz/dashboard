@@ -1,44 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { Select, MenuItem, FormControl, InputLabel, Button, Box } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
-interface selectorciudades {
-  cambiarcity: (city: string) => void;
+function Ciudades({ onCityChange }) {
+    const [city, setCity] = useState('');
+
+    const handleChange = (event) => {
+        const selectedCity = event.target.value;
+        setCity(selectedCity);
+        onCityChange(selectedCity);
+    };
+
+    useEffect(() => {
+         // definimos
+    }, []);
+
+    return (
+        <FormControl fullWidth>
+            <InputLabel id="city-selector-label">Ciudad</InputLabel>
+            <Select
+                labelId="city-selector-label"
+                id="city-selector"
+                value={city}
+                label="Ciudad"
+                onChange={handleChange}
+            >
+                <MenuItem value="Guayaquil">Guayaquil</MenuItem>
+                <MenuItem value="Quito">Quito</MenuItem>
+                <MenuItem value="Cuenca">Cuenca</MenuItem>
+            </Select>
+        </FormControl>
+    );
 }
-
-const Ciudades: React.FC<selectorciudades> = ({ cambiarcity }) => {
-
-
-  const [city, setCity] = useState<string>('');
-  const [cities] = useState<string[]>(['Guayaquil', 'Quito', 'Cuenca']); 
-
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setCity(event.target.value as string);
-  };
-
-  const handleButtonClick = () => {
-    cambiarcity(city);
-  };
-
-  return (
-    <Box sx={{ minWidth: 120, display: 'flex', alignItems: 'center' }}>
-      <FormControl fullWidth>
-        <InputLabel id="city-select-label">Ciudad</InputLabel>
-        <Select
-          labelId="city-select-label"
-          id="city-select"
-          value={city}
-          onChange={handleChange}
-        >
-          {cities.map((city, index) => (
-            <MenuItem key={index} value={city}>{city}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <Button variant="contained" color="primary" onClick={handleButtonClick} sx={{ ml: 2 }}>
-        Cargar Datos
-      </Button>
-    </Box>
-  );
-};
 
 export default Ciudades;

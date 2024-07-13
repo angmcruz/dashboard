@@ -7,19 +7,19 @@ import Summary from './components/Summary';
 import WeatherChart from './components/WeatherChart';
 import ControlPanel from './components/ControlPane';
 import Header from './components/Header';
-import Ciudades from './components/Ciudades'; 
 import { useEffect, useState } from 'react';
+import Ciudades from './components/Ciudades';
 
 
 function App() {
 
 	let [Indicators, setIndicators] = useState([])
 	let [rowsTable, setRowsTable] = useState([])
-	let [cities, setCities] = useState(['Guayaquil', 'Quito', 'Cuenca']);
-    let [selectedCity, setSelectedCity] = useState('Guayaquil');
-	
+	 let [selectedCity, setSelectedCity] = useState('Guayaquil');
 
-	const fetchData = async (city: string) => {
+	useEffect(() => {
+		//autoejecuta
+		(async () => {
 
 			{/*
 
@@ -28,9 +28,9 @@ function App() {
 			let savedTextXML = await response.text();
 			*/}
 
+
+			
 			{/* /* USAR LOCALSTORAGE REORGANIZAR CODIGO}*/ }
-
-
 			let savedTextXML = localStorage.getItem("openWeatherMap")
 			let expiringTime = localStorage.getItem("expiringTime")
 			let nowTime = (new Date()).getTime();
@@ -107,13 +107,17 @@ function App() {
 
 
 
-	}, [])
+	}, [selectedCity])
+	const handleCityChange = (city) => {
+        setSelectedCity(city);
+    };
 
 
 	return (
 
 		<>
             <Header title = "New Dashboard: Ec"/>
+			
             <Grid container spacing={3} sx={{ padding: 3 }}>
                 
                 <Grid  xs={12} container spacing={3}>
@@ -135,6 +139,7 @@ function App() {
                 </Grid>
 
                 <Header title = "Datos por Ciudad"/>
+				<Ciudades onCityChange={handleCityChange} />
                 <Grid  xs={12} container spacing={3}>
                     <BasicTable rows={rowsTable} />
                 </Grid>
