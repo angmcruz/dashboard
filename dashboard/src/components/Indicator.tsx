@@ -13,7 +13,9 @@ export default function Indicator(config: Config) {
             sx={{
               p: 2,
               display: 'flex',
-              flexDirection: 'column'
+              flexDirection: 'column',
+              alignItems: 'center',
+              marginBottom: 2,
             }}
           >
             <Typography component="h2" variant="h6" color="primary" gutterBottom>
