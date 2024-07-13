@@ -9,7 +9,7 @@ const Ciudades: React.FC<selectorciudades> = ({ cambiarcity }) => {
 
 
   const [city, setCity] = useState<string>('');
-  const [cities, setCities] = useState<string[]>(['Guayaquil', 'Quito', 'Cuenca']); // Lista de ciudades
+  const [cities] = useState<string[]>(['Guayaquil', 'Quito', 'Cuenca']); 
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setCity(event.target.value as string);

@@ -7,6 +7,7 @@ import Summary from './components/Summary';
 import WeatherChart from './components/WeatherChart';
 import ControlPanel from './components/ControlPane';
 import Header from './components/Header';
+import Ciudades from './components/Ciudades'; 
 import { useEffect, useState } from 'react';
 s
 
@@ -14,11 +15,11 @@ function App() {
 
 	let [Indicators, setIndicators] = useState([])
 	let [rowsTable, setRowsTable] = useState([])
+	let [cities, setCities] = useState(['Guayaquil', 'Quito', 'Cuenca']);
+    let [selectedCity, setSelectedCity] = useState('Guayaquil');
 	
 
-	useEffect(() => {
-		//autoejecuta
-		(async () => {
+	const fetchData = async (city: string) => {
 
 			{/*
 
@@ -28,6 +29,8 @@ function App() {
 			*/}
 
 			{/* /* USAR LOCALSTORAGE REORGANIZAR CODIGO}*/ }
+
+
 			let savedTextXML = localStorage.getItem("openWeatherMap")
 			let expiringTime = localStorage.getItem("expiringTime")
 			let nowTime = (new Date()).getTime();
