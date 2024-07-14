@@ -15,16 +15,19 @@ import sunset from './assets/sunset.jpeg'
 
 
 
-  interface RowTableProps {
+  interface RowProps {
 	rangeHours: string;
 	windDirection: string;
+	pressure: string;
+  	temperature: string;
+  	clouds: string;
   }
 
 
 function App() {
 
 	let [Indicators, setIndicators] = useState<React.ReactNode[]>([]);
-	let [rowsTable, setRowsTable] = useState<RowTableProps[]>([]);
+	let [rowsTable, setRowsTable] = useState<RowProps[]>([]);
 	let [selectedCity, setSelectedCity] = useState('Guayaquil');
 	let [currentTime, setCurrentTime] = useState("");
 	let [currentDate, setCurrentDate] = useState("");
@@ -40,6 +43,8 @@ function App() {
 			//limpia  el storage
 			 localStorage.removeItem("openWeatherMap");
 			 localStorage.removeItem("expiringTime");
+
+
 			{/* /* USAR LOCALSTORAGE REORGANIZAR CODIGO}*/ }
 			let savedTextXML = localStorage.getItem("openWeatherMap")
 			let expiringTime = localStorage.getItem("expiringTime")
@@ -104,11 +109,13 @@ function App() {
 			if (from && to) {
 				let rangeHours = from.split("T")[1] + " - " + to.split("T")[1];
 				let windDirectionElement = timeElement.getElementsByTagName("windDirection")[0];
-				let windDirection = windDirectionElement.getAttribute("deg") + " " + windDirectionElement.getAttribute("code");
-	
-				return { rangeHours, windDirection };
+				let windDirection = (windDirectionElement?.getAttribute("deg") ?? '') + " " + (windDirectionElement?.getAttribute("code") ?? '');
+          let pressure = timeElement.getElementsByTagName("pressure")[0]?.getAttribute("value") ?? '';
+          let temperature = timeElement.getElementsByTagName("temperature")[0]?.getAttribute("value") ?? '';
+          let clouds = timeElement.getElementsByTagName("clouds")[0]?.getAttribute("all") ?? '';
+				return { rangeHours, windDirection, pressure,temperature,clouds};
 			  }
-			  return { rangeHours: '', windDirection: '' };
+			  return { rangeHours: '', windDirection: '' , pressure: '' ,temperature: '',clouds: ''};
 			});
 
 			arrayObjects = arrayObjects.slice(0, 8)

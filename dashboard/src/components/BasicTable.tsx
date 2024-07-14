@@ -18,6 +18,9 @@ interface Config {
 interface Row {
   rangeHours: string;
   windDirection: string;
+  pressure: string;
+  temperature: string;
+  clouds: string;
 }
 
 
@@ -52,6 +55,21 @@ export default function BasicTable( rows: Config) {
                 Dirección del viento
               </Typography>
             </TableCell>
+            <TableCell align="right">
+              <Typography variant="body1" component="span" style={{ fontWeight: 'bold' }}>
+                Presion
+              </Typography>
+            </TableCell>
+            <TableCell align="right">
+              <Typography variant="body1" component="span" style={{ fontWeight: 'bold' }}>
+                Temperatura: K
+              </Typography>
+            </TableCell>
+            <TableCell align="right">
+              <Typography variant="body1" component="span" style={{ fontWeight: 'bold' }}>
+                Nubosidad
+              </Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -63,6 +81,9 @@ export default function BasicTable( rows: Config) {
                 {row.rangeHours}
             </TableCell>
             <TableCell align="right">{row.windDirection}</TableCell>
+            <TableCell align="right">{row.pressure}</TableCell>
+              <TableCell align="right">{row.temperature}</TableCell>
+              <TableCell align="right">{row.clouds}</TableCell>
         </TableRow>
           ))}
         </TableBody>
