@@ -3,12 +3,12 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-interface header {
+interface Header {
   title: string;
 }
 
 
-const Header: React.FC<header> = ({ title }) => {
+const Header: React.FC<Header> = ({ title }) => {
     return (
       <AppBar position="static">
         <Toolbar>

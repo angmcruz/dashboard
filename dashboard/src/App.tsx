@@ -28,14 +28,6 @@ function App() {
 		//autoejecuta
 		(async () => {
 
-			{/*
-
-			let API_KEY = "c33c7a84485848efbc31c87efe17e9ef"
-			let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Guayaquil&mode=xml&appid=${API_KEY}`)
-			let savedTextXML = await response.text();
-			*/}
-
-
 			
 			{/* /* USAR LOCALSTORAGE REORGANIZAR CODIGO}*/ }
 			let savedTextXML = localStorage.getItem("openWeatherMap")
@@ -48,7 +40,7 @@ function App() {
 				{/* 5. Request */ }
 
 				let API_KEY = "c33c7a84485848efbc31c87efe17e9ef"
-				let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Guayaquil&mode=xml&appid=${API_KEY}`)
+				let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&mode=xml&appid=${API_KEY}`)
 				savedTextXML = await response.text();
 
 
@@ -130,27 +122,27 @@ function App() {
 	return (
 
 		<>
-		<Header title="New Dashboard: Ec" />
+		<Header title="New Dashboard: Ciudad Principal" />
 		<Grid container spacing={3} sx={{ padding: 3 }}>
 		  <Grid xs={12} container spacing={3}>
-			<Grid xs={12} md={4} lg={2}>
+			<Grid xs={12} md={4} lg={3}>
 			  {Indicators[0]}
 			</Grid>
-			<Grid xs={12} md={4} lg={2}>
+			<Grid xs={12} md={4} lg={3}>
 			  {Indicators[1]}
 			</Grid>
-			<Grid xs={12} md={4} lg={2}>
+			<Grid xs={12} md={4} lg={3}>
 			  {Indicators[2]}
 			</Grid>
-			<Grid xs={12} md={4} lg={2}>
+			<Grid xs={12} md={4} lg={3}>
 			  <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} />
 			</Grid>
-			<Grid xs={12} sm={4} md={3} lg={4}>
+			<Grid xs={12} sm={4} md={3} lg={5}>
 			  <Summary />
 			</Grid>
 		  </Grid>
   
-		  <Header title="Datos por Ciudad" />
+		  <Header title="Datos " />
   
 		  <Grid xs={12} container spacing={3}>
 			<BasicTable rows={rowsTable} />

@@ -83,7 +83,7 @@ export default function ControlPanel() {
              </Typography>
                 
                 
-             <Typography ref={descriptionRef} mt={2} component="p" color="text.secondary" />
+            
 
 
         </Paper>
