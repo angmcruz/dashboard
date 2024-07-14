@@ -6,7 +6,7 @@ import Indicator from './components/Indicator';
 import Summary from './components/Summary';
 import WeatherChart from './components/WeatherChart';
 import ControlPanel from './components/ControlPane';
-import Header from './components/Header';
+import Header from './components/header';
 import { useEffect, useState } from 'react';
 import Ciudades from './components/Ciudades';
 
@@ -24,11 +24,15 @@ function App() {
 	let [rowsTable, setRowsTable] = useState<RowTableProps[]>([]);
 	let [selectedCity, setSelectedCity] = useState('Guayaquil');
 
-	useEffect(() => {
+
 		//autoejecuta
+	useEffect(() => {
+		
 		(async () => {
 
-			
+			//limpia  el storage
+			 localStorage.removeItem("openWeatherMap");
+			 localStorage.removeItem("expiringTime");
 			{/* /* USAR LOCALSTORAGE REORGANIZAR CODIGO}*/ }
 			let savedTextXML = localStorage.getItem("openWeatherMap")
 			let expiringTime = localStorage.getItem("expiringTime")
@@ -43,7 +47,7 @@ function App() {
 				let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${selectedCity}&mode=xml&appid=${API_KEY}`)
 				savedTextXML = await response.text();
 
-
+				console.log(savedTextXML);
 				{/* 6. Diferencia de tiempo */ }
 
 				let hours = 1
@@ -123,6 +127,7 @@ function App() {
 
 		<>
 		<Header title="New Dashboard: Ciudad Principal" />
+		<Ciudades onCityChange={handleCityChange} />
 		<Grid container spacing={3} sx={{ padding: 3 }}>
 		  <Grid xs={12} container spacing={3}>
 			<Grid xs={12} md={4} lg={3}>
@@ -149,7 +154,7 @@ function App() {
 		  </Grid>
   
 		  <Header title="Gráficos" />
-		  <Ciudades onCityChange={handleCityChange} />
+		  
 		  <Grid xs={12} container spacing={3}>
 			<Grid xs={12} lg={12}>
 			  <ControlPanel />
