@@ -21,6 +21,7 @@ export default function ControlPanel() {
 
     let options = items.map( (item, key) => <MenuItem key={key} value={key}>{item["name"]}</MenuItem> )
     let [selected, setSelected] = useState(-1) //variable de estado
+    
     const descriptionRef = useRef<HTMLDivElement>(null);
 
     // manejador de eventos
@@ -28,6 +29,7 @@ export default function ControlPanel() {
 			
         let idx = parseInt(event.target.value)
         setSelected( idx );
+        
 
         if (descriptionRef.current !== null) {
             descriptionRef.current.innerHTML = (idx >= 0) ? items[idx]["description"] : ""
@@ -74,12 +76,12 @@ export default function ControlPanel() {
 
             </Box>
                 
-            {/*<Typography mt={2} component="p" color="text.secondary">
+            <Typography mt={2} component="p" color="text.secondary">
              {
                  (selected >= 0)?items[selected]["description"]:""
              }
              </Typography>
-                */}
+                
                 
              <Typography ref={descriptionRef} mt={2} component="p" color="text.secondary" />
 

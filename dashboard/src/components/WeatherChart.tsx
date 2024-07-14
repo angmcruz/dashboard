@@ -8,9 +8,13 @@ interface WeatherChart {
     city: string
 
 }
+type WeatherData = [string, string, string, string] | [string, number, number, number];
+
 export default function WeatherChart({city}: WeatherChart) {
 
-    let [data, setData] = useState([["Hora", "Precipitación", "Humedad", "Nubosidad"]]);
+    let [data, setData] = useState<(string | number)[][]>([
+        ["Hora", "Precipitación", "Humedad", "Nubosidad"]
+    ]);
     
 
     {/* Configuración */}
@@ -26,7 +30,7 @@ export default function WeatherChart({city}: WeatherChart) {
    
     useEffect(() => {
        
-        let datosbycity = {
+        let datosbycity: { [key: string]: WeatherData[] } = {
             "Guayaquil": [
                 ["Hora", "Precipitación", "Humedad", "Nubosidad"],
                 ["03:00", 13, 78, 75],
@@ -59,7 +63,7 @@ export default function WeatherChart({city}: WeatherChart) {
             ]
            
         };
-        setData(datosbycity[city] || [["Hora", "Precipitación", "Humedad", "Nubosidad"]]);
+        setData(datosbycity[city] || [["Hora", 0, 1, 2]]);
 
     }, [city]);
 

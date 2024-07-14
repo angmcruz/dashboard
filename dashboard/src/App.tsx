@@ -11,11 +11,18 @@ import { useEffect, useState } from 'react';
 import Ciudades from './components/Ciudades';
 
 
+
+
+  interface RowTableProps {
+	rangeHours: string;
+	windDirection: string;
+  }
+
 function App() {
 
-	let [Indicators, setIndicators] = useState([])
-	let [rowsTable, setRowsTable] = useState([])
-	 let [selectedCity, setSelectedCity] = useState('Guayaquil');
+	let [Indicators, setIndicators] = useState<React.ReactNode[]>([]);
+	let [rowsTable, setRowsTable] = useState<RowTableProps[]>([]);
+	let [selectedCity, setSelectedCity] = useState('Guayaquil');
 
 	useEffect(() => {
 		//autoejecuta
@@ -88,15 +95,18 @@ function App() {
 			setIndicators(indicatorsElements);
 
 			let arrayObjects = Array.from(xml.getElementsByTagName("time")).map((timeElement) => {
+				let from = timeElement.getAttribute("from");
+				let to = timeElement.getAttribute("to");
 
-				let rangeHours = timeElement.getAttribute("from").split("T")[1] + " - " 
-				+ timeElement.getAttribute("to").split("T")[1]
-
-				let windDirection = timeElement.getElementsByTagName("windDirection")[0].getAttribute("deg") + " " + timeElement.getElementsByTagName("windDirection")[0].getAttribute("code")
-
-				return { "rangeHours": rangeHours, "windDirection": windDirection }
-
-			})
+			if (from && to) {
+				let rangeHours = from.split("T")[1] + " - " + to.split("T")[1];
+				let windDirectionElement = timeElement.getElementsByTagName("windDirection")[0];
+				let windDirection = windDirectionElement.getAttribute("deg") + " " + windDirectionElement.getAttribute("code");
+	
+				return { rangeHours, windDirection };
+			  }
+			  return { rangeHours: '', windDirection: '' };
+			});
 
 			arrayObjects = arrayObjects.slice(0, 8)
 
@@ -110,6 +120,8 @@ function App() {
 
 
 	}, [selectedCity])
+
+	
 	const handleCityChange = (city:string) => {
         setSelectedCity(city);
     };
@@ -118,49 +130,45 @@ function App() {
 	return (
 
 		<>
-            <Header title = "New Dashboard: Ec"/>
-			
-            <Grid container spacing={3} sx={{ padding: 3 }}>
-                
-                <Grid  xs={12} container spacing={3}>
-                    <Grid  xs={12} md={4} lg={2}>
-                        {Indicators[0]}
-                    </Grid>
-                    <Grid  xs={12} md={4} lg={2}>
-                        {Indicators[1]}
-                    </Grid>
-                    <Grid  xs={12} md={4} lg={2}>
-                        {Indicators[2]}
-                    </Grid>
-                    <Grid  xs={12} md={4} lg={2}>
-                        <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} />
-                    </Grid>
-                    <Grid  xs={12} sm={4} md={3} lg={4}>
-                        <Summary />
-                    </Grid>
-                </Grid>
-
-                <Header title = "Datos por Ciudad"/>
-				
-                <Grid  xs={12} container spacing={3}>
-
-                    <BasicTable rows={rowsTable} />
-                </Grid>
-
-                <Header title = "Graficos"/>
-				<Ciudades onCityChange={handleCityChange} />
-                <Grid  xs={12} container spacing={3}>
-                    <Grid  xs={12} lg={12}>
-                        <ControlPanel />
-                    </Grid>
-
-				
-                    <Grid  xs={12} lg={12}>
-						<WeatherChart city={selectedCity} />
-                    </Grid>
-                </Grid>
-            </Grid>
-        </>
+		<Header title="New Dashboard: Ec" />
+		<Grid container spacing={3} sx={{ padding: 3 }}>
+		  <Grid xs={12} container spacing={3}>
+			<Grid xs={12} md={4} lg={2}>
+			  {Indicators[0]}
+			</Grid>
+			<Grid xs={12} md={4} lg={2}>
+			  {Indicators[1]}
+			</Grid>
+			<Grid xs={12} md={4} lg={2}>
+			  {Indicators[2]}
+			</Grid>
+			<Grid xs={12} md={4} lg={2}>
+			  <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} />
+			</Grid>
+			<Grid xs={12} sm={4} md={3} lg={4}>
+			  <Summary />
+			</Grid>
+		  </Grid>
+  
+		  <Header title="Datos por Ciudad" />
+  
+		  <Grid xs={12} container spacing={3}>
+			<BasicTable rows={rowsTable} />
+		  </Grid>
+  
+		  <Header title="Gráficos" />
+		  <Ciudades onCityChange={handleCityChange} />
+		  <Grid xs={12} container spacing={3}>
+			<Grid xs={12} lg={12}>
+			  <ControlPanel />
+			</Grid>
+  
+			<Grid xs={12} lg={12}>
+			  <WeatherChart city={selectedCity} />
+			</Grid>
+		  </Grid>
+		</Grid>
+	  </>
     );
 }
 
