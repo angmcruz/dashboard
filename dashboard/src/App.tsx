@@ -26,6 +26,9 @@ function App() {
 	let [Indicators, setIndicators] = useState<React.ReactNode[]>([]);
 	let [rowsTable, setRowsTable] = useState<RowTableProps[]>([]);
 	let [selectedCity, setSelectedCity] = useState('Guayaquil');
+	let [currentTime, setCurrentTime] = useState("");
+	let [currentDate, setCurrentDate] = useState("");
+	
 
 
 
@@ -112,7 +115,10 @@ function App() {
 
 			setRowsTable(arrayObjects)
 
+
 			};
+	
+			
 
 		})()
 
@@ -126,6 +132,42 @@ function App() {
         setSelectedCity(city);
     };
 
+
+	//hora local
+	useEffect(() => {
+		const fetchCurrentTime = async () => {
+
+			const response = await fetch("https://worldtimeapi.org/api/timezone/America/Guayaquil");
+			const data = await response.json();
+
+			const date = new Date(data.datetime);
+			const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+			const formattedTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+			setCurrentTime(`${formattedDate} | Hora: ${formattedTime}`);
+			
+	
+		};
+		fetchCurrentTime();
+
+
+		const setDate = async () => {
+
+			const response = await fetch("https://worldtimeapi.org/api/timezone/America/Guayaquil");
+			const data = await response.json();
+
+			const date = new Date(data.datetime);
+			const formattedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+			
+			setCurrentDate(`${formattedDate}`);
+			
+	
+		};
+		setDate();
+	
+		const interval = setInterval(fetchCurrentTime, 1000);
+	
+		return () => clearInterval(interval);
+	  }, []);
 	
 
 
@@ -136,8 +178,11 @@ function App() {
 			<h1>
 				NEW DASHBOARD
 			</h1>
+			<h3>
+				Fecha: {currentTime}
+			</h3>
 		</Grid>
-		<Header title="Informacion por Ciudad" />
+		<Header title="Informacion por Ciudad" city=''/>
 		<Ciudades onCityChange={handleCityChange} />
 		<Grid container spacing={3} sx={{ padding: 3 }}>
 		  <Grid xs={12} container spacing={3}>
@@ -155,24 +200,24 @@ function App() {
 			</Grid>
 
 
-			<Grid xs={12} sm={4} md={3} lg={6}>
-			  <Summary title='Amanecer' hora= '05:19:08' imagen= {sunrise} />
+			<Grid xs={12} sm={4} md={3} lg={6} >
+			  <Summary title='Amanecer' hora= '05:19:08' imagen= {sunrise} fecha={currentDate}/>
 			</Grid>
 			
 			<Grid xs={12} sm={4} md={3} lg={6}>
-			  <Summary title='Atardecer' hora= '18:35:07' imagen={sunset}/>
+			  <Summary title='Atardecer' hora= '18:35:07' imagen={sunset} fecha={currentDate}/>
 			</Grid>
 
 
 		  </Grid>
   
-		  <Header title="Datos " />
+		  <Header title="Datos de:" city={selectedCity} />
   
 		  <Grid xs={12} container spacing={3}>
 			<BasicTable rows={rowsTable} />
 		  </Grid>
   
-		  <Header title="Gráficos" />
+		  <Header title="Gráficos de:" city={selectedCity}/>
 		  
 		  <Grid xs={12} container spacing={3}>
 			<Grid xs={12} lg={12}>

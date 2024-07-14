@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 
 
@@ -41,8 +42,16 @@ export default function BasicTable( rows: Config) {
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-          <TableCell>Rango de horas</TableCell>
-          <TableCell align="right">Dirección del viento</TableCell>
+          <TableCell>
+              <Typography variant="body1" component="span" style={{ fontWeight: 'bold' }}>
+                Rango de horas
+              </Typography>
+            </TableCell>
+            <TableCell align="right">
+              <Typography variant="body1" component="span" style={{ fontWeight: 'bold' }}>
+                Dirección del viento
+              </Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

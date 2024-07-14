@@ -9,11 +9,12 @@ interface Summary {
     title: string;
     hora: string;
     imagen: string;
+    fecha:string;
     
   }
   
   
-  const Summary: React.FC<Summary> = ({ title,hora,imagen})  => {
+  const Summary: React.FC<Summary> = ({ title,hora,imagen,fecha})  => {
     
     return (
         <Card sx={{ maxWidth: 500 }}>
@@ -32,7 +33,7 @@ interface Summary {
                         {hora}
                     </Typography>
                     <Typography color="text.secondary" sx={{ flex: 1 }}>
-                        en 28 July, 2024
+                        {fecha}
                     </Typography>
                 </CardContent>
             </CardActionArea>

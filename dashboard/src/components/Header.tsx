@@ -5,15 +5,19 @@ import Typography from '@mui/material/Typography';
 
 interface Header {
   title: string;
+  city: string;
 }
 
 
-const Header: React.FC<Header> = ({ title }) => {
+const Header: React.FC<Header> = ({ title, city }) => {
     return (
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div">
             {title}
+          </Typography>
+          <Typography variant="h6" component="div">
+            {city}
           </Typography>
         </Toolbar>
       </AppBar>
