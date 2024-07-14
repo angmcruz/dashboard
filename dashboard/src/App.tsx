@@ -6,7 +6,7 @@ import Indicator from './components/Indicator';
 import Summary from './components/Summary';
 import WeatherChart from './components/WeatherChart';
 import ControlPanel from './components/ControlPane';
-import Header from './components/header';
+import Header from './components/Header';
 import { useEffect, useState } from 'react';
 import Ciudades from './components/Ciudades';
 
@@ -126,7 +126,7 @@ function App() {
 	return (
 
 		<>
-		<Header title="New Dashboard: Ciudad Principal" />
+		<Header title="New Dashboard: Por Ciudad" />
 		<Ciudades onCityChange={handleCityChange} />
 		<Grid container spacing={3} sx={{ padding: 3 }}>
 		  <Grid xs={12} container spacing={3}>
@@ -142,9 +142,17 @@ function App() {
 			<Grid xs={12} md={4} lg={3}>
 			  <Indicator title='Precipitación' subtitle='Probabilidad' value={0.13} />
 			</Grid>
-			<Grid xs={12} sm={4} md={3} lg={5}>
-			  <Summary />
+
+
+			<Grid xs={12} sm={4} md={3} lg={6}>
+			  <Summary title='Amanecer' hora= '05:19:08' />
 			</Grid>
+			
+			<Grid xs={12} sm={4} md={3} lg={6}>
+			  <Summary title='Atardecer' hora= '18:35:07' />
+			</Grid>
+
+
 		  </Grid>
   
 		  <Header title="Datos " />
