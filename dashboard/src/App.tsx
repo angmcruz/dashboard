@@ -9,6 +9,8 @@ import ControlPanel from './components/ControlPane';
 import Header from './components/Header';
 import { useEffect, useState } from 'react';
 import Ciudades from './components/Ciudades';
+import sunrise from './assets/sunrise.jpeg'
+import sunset from './assets/sunset.jpeg'
 
 
 
@@ -18,11 +20,13 @@ import Ciudades from './components/Ciudades';
 	windDirection: string;
   }
 
+
 function App() {
 
 	let [Indicators, setIndicators] = useState<React.ReactNode[]>([]);
 	let [rowsTable, setRowsTable] = useState<RowTableProps[]>([]);
 	let [selectedCity, setSelectedCity] = useState('Guayaquil');
+
 
 
 		//autoejecuta
@@ -122,11 +126,18 @@ function App() {
         setSelectedCity(city);
     };
 
+	
+
 
 	return (
 
 		<>
-		<Header title="New Dashboard: Por Ciudad" />
+		<Grid>
+			<h1>
+				NEW DASHBOARD
+			</h1>
+		</Grid>
+		<Header title="Informacion por Ciudad" />
 		<Ciudades onCityChange={handleCityChange} />
 		<Grid container spacing={3} sx={{ padding: 3 }}>
 		  <Grid xs={12} container spacing={3}>
@@ -145,11 +156,11 @@ function App() {
 
 
 			<Grid xs={12} sm={4} md={3} lg={6}>
-			  <Summary title='Amanecer' hora= '05:19:08' />
+			  <Summary title='Amanecer' hora= '05:19:08' imagen= {sunrise} />
 			</Grid>
 			
 			<Grid xs={12} sm={4} md={3} lg={6}>
-			  <Summary title='Atardecer' hora= '18:35:07' />
+			  <Summary title='Atardecer' hora= '18:35:07' imagen={sunset}/>
 			</Grid>
 
 
@@ -171,6 +182,10 @@ function App() {
 			<Grid xs={12} lg={12}>
 			  <WeatherChart city={selectedCity} />
 			</Grid>
+
+			
+
+
 		  </Grid>
 		</Grid>
 	  </>

@@ -4,15 +4,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 
-import sunrise from '../assets/sunrise.jpeg'
+
 interface Summary {
     title: string;
     hora: string;
+    imagen: string;
     
   }
   
   
-  const Summary: React.FC<Summary> = ({ title,hora })  => {
+  const Summary: React.FC<Summary> = ({ title,hora,imagen})  => {
     
     return (
         <Card sx={{ maxWidth: 500 }}>
@@ -20,7 +21,7 @@ interface Summary {
                 <CardMedia
                     component="img"
                     height="140"
-                    image={sunrise}
+                    image= {imagen}
                     alt="Amanecer"
                 />
                 <CardContent>
