@@ -107,12 +107,13 @@ function App() {
 				let to = timeElement.getAttribute("to");
 
 			if (from && to) {
+				//contenido de la tabla
 				let rangeHours = from.split("T")[1] + " - " + to.split("T")[1];
 				let windDirectionElement = timeElement.getElementsByTagName("windDirection")[0];
 				let windDirection = (windDirectionElement?.getAttribute("deg") ?? '') + " " + (windDirectionElement?.getAttribute("code") ?? '');
-          let pressure = timeElement.getElementsByTagName("pressure")[0]?.getAttribute("value") ?? '';
-          let temperature = timeElement.getElementsByTagName("temperature")[0]?.getAttribute("value") ?? '';
-          let clouds = timeElement.getElementsByTagName("clouds")[0]?.getAttribute("all") ?? '';
+          		let pressure = timeElement.getElementsByTagName("pressure")[0]?.getAttribute("value") ?? '';
+          		let temperature = timeElement.getElementsByTagName("temperature")[0]?.getAttribute("value") ?? '';
+         		 let clouds = timeElement.getElementsByTagName("clouds")[0]?.getAttribute("all") ?? '';
 				return { rangeHours, windDirection, pressure,temperature,clouds};
 			  }
 			  return { rangeHours: '', windDirection: '' , pressure: '' ,temperature: '',clouds: ''};
@@ -134,13 +135,13 @@ function App() {
 
 	}, [selectedCity])
 
-	
+	//seleccionador de ciudad
 	const handleCityChange = (city:string) => {
         setSelectedCity(city);
     };
 
 
-	//hora local
+	//fecha y hora local
 	useEffect(() => {
 		const fetchCurrentTime = async () => {
 
@@ -170,7 +171,7 @@ function App() {
 	
 		};
 		setDate();
-	
+	//intervalo de tiempo
 		const interval = setInterval(fetchCurrentTime, 1000);
 	
 		return () => clearInterval(interval);

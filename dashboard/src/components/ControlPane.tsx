@@ -14,10 +14,11 @@ export default function ControlPanel() {
     {/* Datos de los elementos del Select */}
 
     let items = [
+        {"name":"All", "description":"Mostrando todas las variables meteorologicas"},
         {"name":"Precipitación", "description":"Cantidad de agua, en forma de lluvia, nieve o granizo, que cae sobre una superficie en un período específico."}, 
         {"name": "Humedad", "description":"Cantidad de vapor de agua presente en el aire, generalmente expresada como un porcentaje."}, 
         {"name":"Nubosidad", "description":"Grado de cobertura del cielo por nubes, afectando la visibilidad y la cantidad de luz solar recibida."}
-    ]
+    ]   
 
     let options = items.map( (item, key) => <MenuItem key={key} value={key}>{item["name"]}</MenuItem> )
     let [selected, setSelected] = useState(-1) //variable de estado
