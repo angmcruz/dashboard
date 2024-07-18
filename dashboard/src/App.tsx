@@ -31,9 +31,9 @@ function App() {
 	let [selectedCity, setSelectedCity] = useState('Guayaquil');
 	let [currentTime, setCurrentTime] = useState("");
 	let [currentDate, setCurrentDate] = useState("");
-	
+	let [selected, setSelected] = useState(-1) //variable de estado
 
-
+	let variablex = setSelected.toString();
 
 		//autoejecuta
 	useEffect(() => {
@@ -113,7 +113,7 @@ function App() {
 				let windDirection = (windDirectionElement?.getAttribute("deg") ?? '') + " " + (windDirectionElement?.getAttribute("code") ?? '');
           		let pressure = timeElement.getElementsByTagName("pressure")[0]?.getAttribute("value") ?? '';
           		let temperature = timeElement.getElementsByTagName("temperature")[0]?.getAttribute("value") ?? '';
-         		 let clouds = timeElement.getElementsByTagName("clouds")[0]?.getAttribute("all") ?? '';
+         		let clouds = timeElement.getElementsByTagName("clouds")[0]?.getAttribute("all") ?? '';
 				return { rangeHours, windDirection, pressure,temperature,clouds};
 			  }
 			  return { rangeHours: '', windDirection: '' , pressure: '' ,temperature: '',clouds: ''};
@@ -188,7 +188,9 @@ function App() {
 			</h1>
 			<h3>
 				Fecha: {currentTime}
+				
 			</h3>
+			
 		</Grid>
 		<Header title="Informacion por Ciudad" city=''/>
 		<Ciudades onCityChange={handleCityChange} />
@@ -233,7 +235,9 @@ function App() {
 			</Grid>
   
 			<Grid xs={12} lg={12}>
-			  <WeatherChart city={selectedCity} />
+			  <WeatherChart city={selectedCity} valor={selected}
+			  
+			  />
 			</Grid>
 
 			

@@ -5,12 +5,13 @@ import { useEffect, useState } from 'react';
 
 
 interface WeatherChart {
-    city: string
+    city: string;
+    valor: number;
 
 }
 type WeatherData = [string, string, string, string] | [string, number, number, number];
 
-export default function WeatherChart({city}: WeatherChart) {
+export default function WeatherChart({city,valor}: WeatherChart) {
 
     let [data, setData] = useState<(string | number)[][]>([
         ["Hora", "Precipitación", "Humedad", "Nubosidad"]
@@ -63,9 +64,27 @@ export default function WeatherChart({city}: WeatherChart) {
             ]
            
         };
-        setData(datosbycity[city] || [["Hora", 0, 1, 2]]);
+        const total = (datosbycity[city] || [["Hora", 0, 1, 2]]);
 
-    }, [city]);
+        if (valor ==0) {
+
+            setData(total);
+
+        } else {
+            const filtradas = total.map((row) => {
+                if (valor === 1) {
+                    return [row[0], row[1]];
+                } else if (valor === 2) {
+                    return [row[0], row[2]];
+                } else if (valor === 3) {
+                    return [row[0], row[3]];
+                }
+                return row;
+            });
+            setData(filtradas);
+        }
+
+    }, [city,valor]);
 
     {/* JSX */}
 

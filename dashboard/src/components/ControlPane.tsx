@@ -9,7 +9,7 @@ import { useState, useRef } from 'react';
 
 
 
-export default function ControlPanel() {
+function ControlPane() {
 
     {/* Datos de los elementos del Select */}
 
@@ -65,7 +65,7 @@ export default function ControlPanel() {
                         labelId="simple-select-label"
                         id="simple-select"
                         label="Variables"
-                        defaultValue='-1'
+                        value={selected.toString()}
                         onChange={handleChange}
                     >
                         <MenuItem key="-1" value="-1" disabled>Seleccione una variable</MenuItem>
@@ -92,3 +92,5 @@ export default function ControlPanel() {
 
     )
 }
+
+export default ControlPane;
