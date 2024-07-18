@@ -29,11 +29,12 @@ function App() {
 	let [Indicators, setIndicators] = useState<React.ReactNode[]>([]);
 	let [rowsTable, setRowsTable] = useState<RowProps[]>([]);
 	let [selectedCity, setSelectedCity] = useState('Guayaquil');
+	let [valor, setValor] = useState(-1);
 	let [currentTime, setCurrentTime] = useState("");
 	let [currentDate, setCurrentDate] = useState("");
-	let [selected, setSelected] = useState(-1) //variable de estado
+	
 
-	let variablex = setSelected.toString();
+	
 
 		//autoejecuta
 	useEffect(() => {
@@ -140,6 +141,11 @@ function App() {
         setSelectedCity(city);
     };
 
+	//seleccionador de valor (opcion del controlPane)
+	const handleValorChange = (valor:number) => {
+        setValor(valor);
+    };
+
 
 	//fecha y hora local
 	useEffect(() => {
@@ -231,11 +237,11 @@ function App() {
 		  
 		  <Grid xs={12} container spacing={3}>
 			<Grid xs={12} lg={12}>
-			  <ControlPanel />
+			  <ControlPanel onValorChange={handleValorChange}/>
 			</Grid>
   
 			<Grid xs={12} lg={12}>
-			  <WeatherChart city={selectedCity} valor={selected}
+			  <WeatherChart city={selectedCity} valor={valor}
 			  
 			  />
 			</Grid>

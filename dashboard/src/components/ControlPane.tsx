@@ -7,9 +7,12 @@ import FormControl from '@mui/material/FormControl';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 import { useState, useRef } from 'react';
 
+interface controlpane{
 
+    onValorChange: (valor:number) => void;
+}
 
-function ControlPane() {
+function ControlPane( {onValorChange}: controlpane) {
 
     {/* Datos de los elementos del Select */}
 
@@ -21,8 +24,10 @@ function ControlPane() {
     ]   
 
     let options = items.map( (item, key) => <MenuItem key={key} value={key}>{item["name"]}</MenuItem> )
+   
     let [selected, setSelected] = useState(-1) //variable de estado
-    
+    //pude haberlo hecho con esta pero me mareaban los nombres
+
     const descriptionRef = useRef<HTMLDivElement>(null);
 
     // manejador de eventos
@@ -30,6 +35,7 @@ function ControlPane() {
 			
         let idx = parseInt(event.target.value)
         setSelected( idx );
+        onValorChange(idx);
         
 
         if (descriptionRef.current !== null) {
